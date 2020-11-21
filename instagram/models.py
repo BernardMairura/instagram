@@ -15,7 +15,7 @@ class Profile(models.Model):
     def __str__(self):
         return user
 
-
+# class Comment(models.Model):
 
 class Image(models.Model):
     image=models.ImageField(blank=True,null=True)
@@ -23,8 +23,13 @@ class Image(models.Model):
     image_caption=models.TextField(max_length=255)
     image_profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
     date_created=models.TimeField(auto_now_add=True,blank=True)
-    date_updated=models.TimeField(auto_now_add=True,blank=True)
+    image_likes=models.IntegerField()
+  
 
     def __str__(self):
         return image_caption
+
+
+
+
 
