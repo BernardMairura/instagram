@@ -1,0 +1,30 @@
+
+{% extends './base.html' %}
+{%load bootstrap4%}
+{% load static%}
+{% block content%}
+   <div class="container main">
+       <div class="row">
+          <a href="{% url 'post'%}"><input type="button" value="post" class="btn btn-outline-secondary"></a> 
+       </div>
+       <div class="row" style="padding:10px;">
+           <div class="col-md-8" style="padding-bottom:10px;">
+               {% for post in posts%}
+                    <div class="card">
+                        <img src="{{post.image.url}}" class="img-fluid posty card-img-top">
+                        <div class="card-body">
+                            <span><a href="/vote/?id={{ post.id }}"><img src="{% static 'images/heartlike.png'%}" class="img-fluid icon"></a>{{post.image_likes}}</span>
+                            
+                        </div>
+                        {%for comment in comment%}
+                        {{post.comment}}
+                        {%endfor %}
+                       <a href="{% url 'comment' post.id%}" class="btn btn-outline-secondary">comment</a>
+                    </div>
+                    <br>
+                   
+               {% endfor%}
+           </div>
+       </div>
+   </div>
+{% endblock%}

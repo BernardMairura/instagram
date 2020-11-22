@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
-import json
+
 
 
 
@@ -11,7 +11,7 @@ import json
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     bio=models.TextField(max_length=500,blank=True)
-    profile_photo=models.ImageField(upload_to='avatar' ,null=True)
+    profile_photo=models.ImageField(upload_to='avatar/' ,null=True)
     location=models.CharField(max_length=50,blank=True)
     birth_date=models.DateField(null=True,blank=True)
 
@@ -28,12 +28,12 @@ class Profile(models.Model):
 
 
 class Image(models.Model):
-    image=models.ImageField(blank=True,null=True)
+    image=models.ImageField(upload_to='images/', blank=True,null=True)
     image_name=models.CharField(max_length=20)
-    image_caption=models.TextField(max_length=255)
+    caption=models.TextField(max_length=255)
     image_profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
     date_created=models.TimeField(auto_now_add=True,blank=True)
-    image_likes=models.IntegerField()
+    likes=models.PositiveIntegerField()
   
 
     def __str__(self):
@@ -46,19 +46,11 @@ class Image(models.Model):
     def delete_Image(self):
         self.delete()
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
 
 
 class Comment(models.Model):
-    comment=models.CharField(max_length=150)
-    image=models.ForeignKey(Image,on_delete=models.CASCADE, null=True)
+    comment=models.TextField(max_length=150)
+    post = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
     date_commented=models.DateField(auto_now_add=True,blank=True)
 
 
@@ -77,6 +69,16 @@ class Comment(models.Model):
 
     def delete_Comment(self):
         self.delete()
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 
 
