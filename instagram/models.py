@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import Signal
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from datetime import datetime
+
 
 
 # Create your models here.
@@ -15,7 +17,14 @@ class Profile(models.Model):
     def __str__(self):
         return user
 
-# class Comment(models.Model):
+    def save_Profile(self):
+        self.save()
+
+    def delete_Profile(self):
+        self.delete()
+
+
+
 
 class Image(models.Model):
     image=models.ImageField(blank=True,null=True)
@@ -28,6 +37,46 @@ class Image(models.Model):
 
     def __str__(self):
         return image_caption
+
+
+    def save_Image(self):
+        self.save()
+    
+    def delete_Image(self):
+        self.delete()
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+
+class Comment(models.Model):
+    comment=models.CharField(max_length=150)
+    image=models.ForeignKey(Image,on_delete=models.CASCADE, null=True)
+    date_commented=models.DateField(auto_now_add=True,blank=True)
+
+
+    class Meta:
+        ordering=['-date_commented']
+
+
+
+    def __str__(self):
+        return comment
+
+
+    def save_Comment(self):
+        self.save()
+
+
+    def delete_Comment(self):
+        self.delete()
+
 
 
 
