@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'sendgrid',
     'instagram',
     'django.contrib.admin',
     'django.contrib.auth',
