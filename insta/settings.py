@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary',
     'sendgrid',
     'instagram',
     'bootstrap4',
@@ -145,6 +146,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+#Include Cloudinary's Python classes in your code:
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 # Static files (CSS, JavaScript, Images)

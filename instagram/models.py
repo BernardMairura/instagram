@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
 from tinymce.models import HTMLField
+from cloudinary.models import CloudinaryField
 
 
 
@@ -54,6 +55,7 @@ class Image(models.Model):
     date_created=models.TimeField(auto_now_add=True,blank=True)
     likes=models.PositiveIntegerField(null=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE, null=True)
+    users_likes = models.ManyToManyField(User, related_name='post_likes')
 
     class Meta:
        ordering = ['-date_created']
