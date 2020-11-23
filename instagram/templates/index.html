@@ -21,6 +21,11 @@
           <img src="{{image.image.url}}" alt="" class="image-fluid" style="width:80%; height:100%">
           <hr>
 
+          <div class="icons mt-3"><a href="{% url 'comment' pk=image.id %}" class="btn btn-primary"   class="far fa-comment fa-2x ml-4" style="font-family: 'Josefin Slab', serif;font-size:20px;">Comment</a>
+            <a id="like" href="{% url 'like' operation='like' pk=image.id%}" style="color:inherit;"><i class="far fa-heart fa-2x ml-4"></i></a>
+
+            <a href="#" style="color:inherit;"><i class="far fa-bookmark fa-2x float-right mr-4"></i></a>
+          </div>
           <br>
 
            {% if image.likes >= 1 %}
