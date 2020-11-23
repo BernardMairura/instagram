@@ -96,7 +96,7 @@ def new_comment(request,pk):
 def like(request,operation,pk):
     image = get_object_or_404(Image,pk=pk)
     if operation == 'like':
-        image.likes += 0
+        image.likes += 1
         image.save()
     elif operation =='unlike':
         image.likes -= 1
