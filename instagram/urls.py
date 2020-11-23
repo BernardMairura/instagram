@@ -11,12 +11,14 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns=[
     path('', views.index, name='index'),
-    re_path(r'^Post/New/$', views.post, name='post'),
-    re_path(r'^image/(\d+)', views.single_image, name='single_image'),
-    re_path(r'^profile/', views.profile_results, name='profile_results'),
-    re_path(r'^new/comment/(?P<username>[-_\w.]+)$', views.new_comment, name='newComment'),
-    re_path(r'^new/status/(?P<username>[-_\w.]+)$', views.new_status, name='newStatus'),
-    re_path(r'^accounts/profile/', views.profile, name ='myProfile'),
+    re_path(r'^profile/',views.profile, name='profile'),
+    re_path(r'^search/',views.search_results,name='search_results'),
+    re_path(r'^edit/',views.edit,name='edit'),
+    re_path(r'^view_profile/(?P<pk>\d+)',views.view_your_profile,name='yourprofile'),
+    re_path(r'^comment/(?P<pk>\d+)',views.new_comment,name='comment'),
+    re_path(r'^like/(?P<operation>.+)/(?P<pk>\d+)',views.like, name='like'),
+    re_path(r'^upload_image/',views.upload,name='upload'),
+    re_path(r'^like/(?P<operation>.+)/(?P<pk>\d+)',views.like, name='like'),
     
 
 ]

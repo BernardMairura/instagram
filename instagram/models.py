@@ -31,6 +31,18 @@ class Profile(models.Model):
     def delete_Profile(self):
         self.delete()
 
+    @classmethod
+    def get_profile(cls):
+        profile = Profile.objects.all()
+        return profile
+
+
+    @classmethod
+    def search_profile(cls,search_term):
+        profile = cls.objects.filter(user__username__icontains=search_term)
+        return profile
+
+
 
 
 
@@ -40,7 +52,7 @@ class Image(models.Model):
     caption=models.TextField(max_length=255)
     image_profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
     date_created=models.TimeField(auto_now_add=True,blank=True)
-    likes=models.PositiveIntegerField()
+    likes=models.PositiveIntegerField(null=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE, null=True)
 
     class Meta:
@@ -54,9 +66,10 @@ class Image(models.Model):
     def delete_Image(self):
         self.delete()
 
+  
     @classmethod
-    def search_by_user(cls, search_term):
-        image = cls.objects.filter(caption__icontains=search_term)
+    def get_images(cls):
+        image = Image.objects.all()
         return image
 
     @classmethod
@@ -83,6 +96,12 @@ class Comment(models.Model):
 
     def delete_Comment(self):
         self.delete()
+
+
+    @classmethod
+    def get_comment(cls):
+        comment = Comment.objects.all()
+        return comment
 
 
 # @receiver(post_save, sender=User)
