@@ -11,9 +11,10 @@ from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Profile(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    user=models.OneToOneField(User,on_delete=models.CASCADE)            
     bio=models.TextField(max_length=500,blank=True)
-    profile_photo=models.ImageField(upload_to='avatar/' ,null=True)
+    # profile_photo=models.ImageField(upload_to='avatar/' ,null=True)
+    user=CloudinaryField('image', null=True)
     location=models.CharField(max_length=50,blank=True)
     birth_date=models.DateField(null=True,blank=True)
     last_update = models.DateTimeField(auto_now_add=True, null=True)
@@ -48,7 +49,8 @@ class Profile(models.Model):
 
 
 class Image(models.Model):
-    image=models.ImageField(upload_to='images/', blank=True,null=True)
+    # image=models.ImageField(upload_to='images/', blank=True,null=True)
+    image=CloudinaryField('image', null=True)
     image_name=models.CharField(max_length=20)
     caption=models.TextField(max_length=255)
     image_profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
