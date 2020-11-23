@@ -25,13 +25,9 @@ def profile(request):
     profile = Profile.get_profile()
     image = Image.get_images()
     comments = Comment.get_comment()
-    return render(request,'profile/profile.html',{"title":title,
-                                                  "comments":comments,
-                                                  "image":image,
-                                                  "user":current_user,
-                                                  "profile":profile,})
-
-                                    
+    return render(request,'profile/profile.html',{"title":title,"comments":comments,"image":image,"user":current_user,"profile":profile,})
+                                                  
+                         
 
 @login_required(login_url="/accounts/login/")
 def search_results(request):
@@ -42,10 +38,10 @@ def search_results(request):
         searched_name = Profile.search_profile(search_term)
         message = search_term
 
-        return render(request,'search.html',{"message":message,
-                                             "profiles":profile,
-                                             "user":current_user,
-                                             "username":searched_name})
+        return render(request,'search.html',{"message":message, "profiles":profile,"user":current_user,"username":searched_name})
+                                            
+                                             
+                                             
     else:
         message = "You haven't searched for any term"
         return render(request,'search.html',{"message":message})
@@ -89,7 +85,7 @@ def new_comment(request,pk):
             comment.image = image
             comment.user = current_user
             comment.save()
-            return redirect('home')
+            return redirect('index')
     else:
         form = CommentForm()
     return render(request, 'comment.html', {"user":current_user,"comment_form":form})
@@ -105,7 +101,7 @@ def like(request,operation,pk):
     elif operation =='unlike':
         image.likes -= 1
         image.save()
-    return redirect('home')
+    return redirect('index')
 
 
 @login_required(login_url="/accounts/login/")
@@ -142,7 +138,7 @@ def follow(request, id):
         following.save()
     else:
         pass
-    return redirect(home)
+    return redirect(index)
 
 
 @login_required(login_url='/accounts/login')
@@ -155,9 +151,9 @@ def unfollow(request, id):
 
     following = Follow.objects.filter(
         user=current_user, profile=follow_profile)
-    # following = Follow(user=current_user, profile=follow_profile)
+    
     for item in following:
         item.delete()
-    return redirect(home)
+    return redirect(index)
                                                     
                                                     
