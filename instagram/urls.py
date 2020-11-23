@@ -10,14 +10,14 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns=[
-    path('',views.index,name='index'),
+    path('', views.index, name='index'),
     re_path(r'^Post/New/$', views.post, name='post'),
     re_path(r'^image/(\d+)', views.single_image, name='single_image'),
     re_path(r'^profile/', views.profile_results, name='profile_results'),
-    # path('search/', views.search_results, name='search_results'),
-    # re_path(r'^archives/(\d{4}-\d{2}-\d{2})/$',views.past_days_news,name = 'pastNews'),
-    # re_path(r'^new/article$', views.new_article, name='new-article'),
-    # re_path(r'article/(\d+)', views.article, name='article'),
+    re_path(r'^new/comment/(?P<username>[-_\w.]+)$', views.new_comment, name='newComment'),
+    re_path(r'^new/status/(?P<username>[-_\w.]+)$', views.new_status, name='newStatus'),
+    re_path(r'^accounts/profile/', views.profile, name ='myProfile'),
+    
 
 ]
 

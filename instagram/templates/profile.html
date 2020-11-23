@@ -1,4 +1,4 @@
-{%extends "registbase.html"%}
+{%extends "./base.html"%}
 {% block content %}
 <div class="container-fluid" style="background-color:#EBEDEF; margin-top:100px">
   <div class="row">
@@ -6,7 +6,7 @@
     </div>
     <div class="col-sm-8" style=" padding:30px; border-bottom: 1px solid #ddd">
       <div class="profile">
-        <img src="{{profile.profile_photo.url}}" alt="" style="height:150px;width:150px; border-radius:50%; float:left; margin-right:50px">
+        <img src="{{profile.image.url}}" alt="" style="height:150px;width:150px; border-radius:50%; float:left; margin-right:50px">
         <p style="font-weight:bold; font-size:35px">{{profile.user}}</p>
         <div class="">
           <input type="text" name="" value="Edit Profile" class=" btn btn-default btn-block" style="display:inline-block; width:200px; font-size:20px">
