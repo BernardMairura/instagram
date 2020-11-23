@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary',
     'sendgrid',
     'instagram',
     'bootstrap4',
@@ -147,6 +148,12 @@ USE_L10N = True
 USE_TZ = True
 
 
+#Include Cloudinary's Python classes in your code:
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -189,3 +196,10 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+
+#setting configuration parameters globally in your Django application:
+cloudinary.config( 
+  cloud_name = "hnac2wgc2", 
+  api_key = "784718373871472", 
+  api_secret = "WF8SujRbZQYIH3EdhIV6TLZrtRE" 
+)

@@ -1,4 +1,4 @@
-# INTAGRAM-CLONE APP
+# INSTAGRAM-CLONE APP
 
 
 ## Description

@@ -104,6 +104,7 @@ def like(request,operation,pk):
     return redirect('index')
 
 
+
 @login_required(login_url="/accounts/login/")
 def upload(request):
     title = 'Instagram'
