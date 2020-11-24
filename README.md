@@ -6,7 +6,7 @@ The project is a web app clone of instagram.
 
 ## Setup and Installation Requirements
 * Clone the repo on to your local machine 
-* Make sure you have python installed version 3.6.5 is recommended 
+* Make sure you have python installed version 3.6.5 or higher is recommended 
 * Navigate to the new folder and create a virtual environment 
 * run the command below to install project dependancies
 
