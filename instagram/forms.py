@@ -16,9 +16,9 @@ class EditProfileForm(forms.ModelForm):
 class UploadForm(forms.ModelForm):
     class Meta:
         model = Image
-        exclude = ['user','likes','upload_date','profile']
+        exclude = ['user','likes','date_created','profile']
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        exclude = ['user','comment_date','image']
+        exclude = ['user','date_commented','post']
