@@ -38,11 +38,15 @@
           <div class="row">
             <h5 style="padding: 8px"><a href="{% url 'yourprofile' pk=image.user.id %}"><b>{{image.user.username}}</b></a> {{image.caption}}</h5>
           </div>
-
-          <h6>{{image.upload_date | timesince}} ago</h6>
-          <hr> {% for comment in comments %} {% if image.id == comment.image.id %}
-          <p><b>{{comment.user}}</b> {{comment.comments}}</p>
-          {% endif %} {% endfor %}
+          {% for comment in comments %} 
+          <h6>{% if image.id == comment.post.id %}</h6>
+                  {{comment.date_commented | timesince}} ago
+         <hr> 
+                <p><b>{{comment.user}}</b> 
+                    {{comment.comment}}</p>
+               
+              {%endif%}
+              {% endfor %}
 
         </div>
 
