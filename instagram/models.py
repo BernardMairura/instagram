@@ -85,8 +85,8 @@ class Image(models.Model):
 
 class Comment(models.Model):
     comment=models.TextField(max_length=150)
-    post = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
-    date_commented=models.DateField(auto_now_add=True,blank=True)
+    post = models.ForeignKey(Image,related_name="comments", on_delete=models.CASCADE, null=True)
+    date_commented=models.DateTimeField(auto_now_add=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE, null=True)
 
 
